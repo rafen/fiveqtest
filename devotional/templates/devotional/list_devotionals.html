@@ -1,0 +1,28 @@
+{% extends "devotional/base.html" %}
+
+{% block content %}
+
+<h3>Filters</h3>
+{% if date %}
+  <h4>Actives:</h4>
+  <p>Date: {{date}}</p>
+{% endif %}
+<form name="input"  method="get" action="{% url "devotionals" %}">
+    <input type="text" name="date"/>
+    <input type="submit" value="filter"/>
+    <span> Date format YYYY-MM-DD.</span>
+</form>
+
+<h2>List of Devotionals</h2>
+<ul>
+  {% for devotional in devotionals %}
+    <li>
+      <p>{{ devotional.title }} <p>
+      <p><small>{{ devotional.date|date }}</small></p>
+    </li>
+  {% empty %}
+    <li>No devotionals.</li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
